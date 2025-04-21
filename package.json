@@ -1,0 +1,15 @@
+{
+  "name": "proj1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --watch app.js"
+  },
+  "author": "jeeva",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "kitabshala": "^1.0.4"
+  }
+}
