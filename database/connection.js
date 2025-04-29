@@ -1,8 +1,7 @@
 //database connection file
 const { Sequelize, DataTypes } = require("sequelize");
 require("dotenv").config();
-console.log("Database connection string:", process.env.dbs);
-const sequelize = new Sequelize(process.env.dbs);
+const sequelize = new Sequelize(process.env.dben);
 
 sequelize
   .authenticate()
