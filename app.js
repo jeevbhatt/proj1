@@ -1,26 +1,12 @@
 const express = require("express");
+const bookRoute = require("./routes/bookRoute");
+
 const app = express();
+require("./database/connection");
 const port = 3000;
-require("./database/connection.js");
-//
-app.get("/books", function (req, res) {
-  res.json({ message: "List of books acquired from the database" });
-});
+app.use(express.json());
 
-app.post("/books", function (req, res) {
-  res.json({ message: "Book added to the database" });
-});
-
-app.delete("/books/:id", function (req, res) {
-  res.json({
-    message: "Book deleted from the database",
-  });
-});
-
-app.patch("/books/:id", function (req, res) {
-  res.json({ message: "Book updated in the database" });
-});
-//
+app.use("/api/books/", bookRoute); //bookRoute ko lagi//"/api/books" yesto vaye localhost:3000/api/books
 app.listen(3000, function () {
-  console.log(`Server is running on http://localhost:${port}/`);
+  console.log(`Server is running on http://localhost:${port}/api/books`);
 });
