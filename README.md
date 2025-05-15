@@ -34,25 +34,6 @@
 
 ---
 
-### 📈 GitHub Stats
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=jeevanbhatt&show_icons=true&theme=tokyonight" height="150" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=jeevanbhatt&layout=compact&theme=tokyonight" height="150" />
-</p>
-
----
-
-### 🚀 My Latest Projects
-
-- 🔹 **SaaS CRM Dashboard** – Customer management with roles & analytics
-- 🔹 **TaskFlow** – Productivity tool with team collaboration features
-- 🔹 **EduTech CMS** – Learning management system for schools
-
-> 🧠 Each project is designed to **scale**, follows **MVC or clean architecture**, and uses **JWT/Auth systems**
-
----
-
 ### 🧾 Blogs & Articles
 
 - ✍️ [10 Tips for Clean Code in JavaScript](#)
