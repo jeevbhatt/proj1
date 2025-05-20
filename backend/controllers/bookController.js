@@ -9,21 +9,21 @@ exports.fetchBooks = async function (req, res) {
 };
 
 exports.addBook = async function (req, res) {
-  console.log(req.body); //request bata aayeko data ko lagi
-  /*const bookName = req.body.bookName; //request bata aayeko data ko lagi
+  console.log(req.body);
+  const { bookName, bookPrice, bookAuthor, bookGenre } = req.body; //destructuring ko lagi
+  await books.create({
+    bookName: bookName,
+    bookPrice: bookPrice,
+    bookAuthor: bookAuthor || "Unknown",
+    bookGenre: bookGenre,
+  }); //database ma data insert garna ko lagi
+  res.json({ message: "Book added to the database" });
+};
+/*const bookName = req.body.bookName; //request bata aayeko data ko lagi
   const bookPrice = req.body.bookPrice; //request bata aayeko data ko lagi
   const bookAuthor = req.body.bookAuthor; //request bata aayeko data ko lagi
   alternative method
   */
-  const { bookName, bookPrice, bookAuthor, bookGenre } = req.body; //destructuring ko lagi
-  await books.create({
-    bookName,
-    bookPrice,
-    bookAuthor,
-    bookGenre,
-  }); //database ma data insert garna ko lagi
-  res.json({ message: "Book added to the database" });
-};
 
 exports.deleteBook = async function (req, res) {
   const id = req.params.id; //request bata aayeko data ko lagi
@@ -40,10 +40,10 @@ exports.editBook = async function (req, res) {
   const { bookName, bookPrice, bookAuthor, bookGenre } = req.body; //destructuring ko lagi
   await books.update(
     {
-      bookName,
-      bookPrice,
-      bookAuthor,
-      bookGenre,
+      bookName: bookName,
+      bookPrice: bookPrice,
+      bookAuthor: bookAuthor,
+      bookGenre: bookGenre,
     },
     {
       where: {
