@@ -19,7 +19,7 @@ db.sequelize = sequelize; //sequelize ko instance ho
 db.books = require("./models/bookModel")(sequelize, DataTypes); //bookModel.js ko import
 
 //migrate code moving data from one table to another
-sequelize.sync({ alter: false }).then(() => {
+sequelize.sync({ alter: true }).then(() => {
   //force:true use gare time-time table data loss hunxa
   //alter:true single time true otherwise mostly false loop ma aunxa for update the table
   console.log("Migrate vayo.");

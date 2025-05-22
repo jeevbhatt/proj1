@@ -1,10 +1,7 @@
-function Button({ text, onClick }) {
+function Button({ title, deleteFunctionHo }) {
   return (
-    <button
-      className="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-      onClick={onClick}
-    >
-      {text}
+    <button onClick={deleteFunctionHo} className="bg-green-400">
+      {title}
     </button>
   );
 }

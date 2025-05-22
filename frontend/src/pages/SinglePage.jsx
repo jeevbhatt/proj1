@@ -1,39 +1,41 @@
-import axios from "axios";
-import Navbar from "../components/Navbar";
-import Button from "../components/Button";
 import { useNavigate, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import Navbar from "../components/Navbar";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import Button from "../components/Button";
 
 function SinglePage() {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id } = useParams(); // used to get the parameter of route ..
   const [book, setBook] = useState({});
-  const fetchBooks = async () => {
-    const response = await axios.get("http://localhost:3000/api/books/" + id);
-    setBook(response.data.datas);
+  const fetchBook = async () => {
+    const response = await axios.get("http://localhost:4000/api/books/" + id);
+    setBook(response.data.datas); // response.data.hello
   };
   useEffect(() => {
-    fetchBooks();
+    fetchBook();
   }, []);
 
   const deleteBook = async () => {
     const response = await axios.delete(
-      "http://localhost:3000/api/books/" + id
+      "http://localhost:4000/api/books/" + id
     );
     if (response.status === 200) {
+      // home page ma navigation gardim
       navigate("/");
     } else {
-      console.log("Something went wrong");
+      alert("Something went wrong");
     }
+    // console.log("Delete trigered vayo hai function ....")
   };
   return (
     <>
       <Navbar />
       <h1>{book.bookName}</h1>
+      <p>{book.price}</p>
       <p>{book.bookAuthor}</p>
-      <h1>{book.bookPrice}</h1>
-      <p>{book.bookGenre}</p>
-      <Button onClick={deleteBook}>Delete</Button>
+      {/* <button onClick={deleteBook}>Delete Me</button> */}
+      <Button deleteFunctionHo={deleteBook} />
     </>
   );
 }
