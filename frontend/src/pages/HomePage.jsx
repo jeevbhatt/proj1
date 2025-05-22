@@ -17,7 +17,7 @@ function HomePage() {
       <Navbar />
       <div className="flex flex-wrap justify-center items-center h-screen">
         {books.map(function (book) {
-          return <Card book={book} key={book._id} />;
+          return <Card book={book} key={book.id} />;
         })}
       </div>
     </>

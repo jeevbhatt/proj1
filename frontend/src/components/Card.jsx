@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
-function Card() {
+
+function Card(book) {
   return (
     <>
       <Link to={"/single-page"}>
