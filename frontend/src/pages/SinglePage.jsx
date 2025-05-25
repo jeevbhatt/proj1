@@ -1,41 +1,61 @@
-import { useNavigate, useParams } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import Button from "../components/Button";
+import Navbar from "../components/Navbar";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import Card from "../components/Card";
 
 function SinglePage() {
   const navigate = useNavigate();
-  const { id } = useParams(); // used to get the parameter of route ..
+  const { id } = useParams();
   const [book, setBook] = useState({});
-  const fetchBook = async () => {
-    const response = await axios.get("http://localhost:4000/api/books/" + id);
-    setBook(response.data.datas); // response.data.hello
+  const fetchBooks = async () => {
+    const response = await axios.get(
+      "http://localhost:3000/api/books/" + id,
+      book
+    );
+    setBook(response.data.datas);
   };
   useEffect(() => {
-    fetchBook();
+    fetchBooks();
+    // eslint-disable-next-line
   }, []);
 
   const deleteBook = async () => {
     const response = await axios.delete(
-      "http://localhost:4000/api/books/" + id
+      "http://localhost:3000/api/books/" + id
     );
     if (response.status === 200) {
-      // home page ma navigation gardim
-      navigate("/");
+      alert("Book deleted successfully") && navigate("/");
     } else {
-      alert("Something went wrong");
+      console.log("Something went wrong");
     }
-    // console.log("Delete trigered vayo hai function ....")
   };
   return (
     <>
       <Navbar />
-      <h1>{book.bookName}</h1>
-      <p>{book.price}</p>
-      <p>{book.bookAuthor}</p>
-      {/* <button onClick={deleteBook}>Delete Me</button> */}
-      <Button deleteFunctionHo={deleteBook} />
+      <div className="flex flex-col items-center h-screen">
+        <Card book={book} />
+        <div className="flex flex-row gap-4 mt-4">
+          <button
+            className="bg-red-500 text-white px-4 py-2 rounded"
+            onClick={deleteBook}
+          >
+            Delete
+          </button>
+          <Link
+            to={`/books/${id}/edit`}
+            className="bg-blue-500 text-white px-4 py-2 rounded"
+          >
+            Edit
+          </Link>
+          <button
+            onClick={() => navigate("/")}
+            className="bg-gray-500 text-white px-4 py-2 rounded"
+          >
+            Back to Home
+          </button>
+        </div>
+      </div>
     </>
   );
 }

@@ -12,10 +12,10 @@ exports.addBook = async function (req, res) {
   console.log(req.body);
   const { bookName, bookPrice, bookAuthor, bookGenre } = req.body; //destructuring ko lagi
   await books.create({
-    bookName: bookName,
-    bookPrice: bookPrice,
-    bookAuthor: bookAuthor || "Unknown",
-    bookGenre: bookGenre,
+    bookName,
+    bookPrice,
+    bookAuthor,
+    bookGenre,
   }); //database ma data insert garna ko lagi
   res.json({ message: "Book added to the database" });
 };
@@ -36,22 +36,31 @@ exports.deleteBook = async function (req, res) {
 };
 
 exports.editBook = async function (req, res) {
-  const id = req.params.id; //request bata aayeko data ko lagi
-  const { bookName, bookPrice, bookAuthor, bookGenre } = req.body; //destructuring ko lagi
-  await books.update(
-    {
-      bookName: bookName,
-      bookPrice: bookPrice,
-      bookAuthor: bookAuthor,
-      bookGenre: bookGenre,
-    },
-    {
-      where: {
-        id: id,
-      },
-    }
-  ); //database bata data update garna ko lagi
-  res.json({ message: "Book updated in the database" });
+  try {
+    // logic to update book
+    // kun id ko chai edit garne tyo id linu paryo .
+    const id = req.params.id;
+    // k k update garne tw ..
+    const { bookName, price, bookAuthor, bookGenre } = req.body;
+
+    await books.update(
+      { bookName, price, bookAuthor, bookGenre },
+      {
+        where: {
+          id: id,
+        },
+      }
+    );
+    // books.findByIdAndUpdate(id,{})
+
+    res.json({
+      message: "Book updated successfully",
+    });
+  } catch (error) {
+    res.json({
+      message: "Something went wrong",
+    });
+  }
 };
 
 exports.singleFetchBook = async function (req, res) {

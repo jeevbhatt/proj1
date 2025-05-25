@@ -1,7 +1,10 @@
 import Navbar from "../components/Navbar";
 import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function CreatePage() {
+  const navigate = useNavigate();
   //first approach
   /*const [bookName, setBookName] = useState("");
   const [bookAuthor, setBookAuthor] = useState("");
@@ -22,7 +25,20 @@ console.log(bookName, bookAuthor, bookPrice, bookGenre); */
       [name]: value, //  value--> nepali , name--> bookName
     });
   };
-  console.log(bookData);
+  const submitData = async (e) => {
+    e.preventDefault();
+    const response = await axios.post(
+      "http://localhost:3000/api/books",
+      bookData
+    );
+    if (response.status === 200) {
+      navigate("/");
+    } else {
+      console.log("Something went wrong");
+    }
+  };
+  //pathaune data jahile pani object hunu parcha jun axios bat json ma convert hunxa
+
   return (
     <>
       <Navbar />
@@ -49,7 +65,7 @@ console.log(bookName, bookAuthor, bookPrice, bookGenre); */
           </button>
         </div>
         <div className="p-6 space-y-6">
-          <form action="#">
+          <form onSubmit={submitData}>
             <div className="grid grid-cols-6 gap-6">
               <div className="col-span-6 sm:col-span-3">
                 <label
@@ -124,16 +140,15 @@ console.log(bookName, bookAuthor, bookPrice, bookGenre); */
                 />
               </div>
             </div>
+            <button
+              className="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              type="submit"
+            >
+              Save all
+            </button>
           </form>
         </div>
-        <div className="p-6 border-t border-gray-200 rounded-b">
-          <button
-            className="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-            type="submit"
-          >
-            Save all
-          </button>
-        </div>
+        <div className="p-6 border-t border-gray-200 rounded-b"></div>
       </div>
     </>
   );
